@@ -113,6 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Register"),
+        backgroundColor: Colors.deepPurple, // Stylish AppBar color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -120,38 +121,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Form(
             key: _formKey, // Bind form key for validation
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Username Field
-                TextFormField(
+                _buildTextField(
                   controller: _usernameController,
-                  decoration: const InputDecoration(labelText: "Username"),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a username';
-                    }
-                    return null;
-                  },
+                  label: "Username",
+                  icon: Icons.person,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please enter a username' : null,
                 ),
                 // Full Name Field
-                TextFormField(
+                _buildTextField(
                   controller: _fullNameController,
-                  decoration: const InputDecoration(labelText: "Full Name"),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
-                    }
-                    return null;
-                  },
+                  label: "Full Name",
+                  icon: Icons.person_outline,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please enter your full name' : null,
                 ),
                 // Bio Field
-                TextFormField(
+                _buildTextField(
                   controller: _bioController,
-                  decoration: const InputDecoration(labelText: "Bio"),
+                  label: "Bio",
+                  icon: Icons.text_fields,
+                  validator: (value) => null,
                 ),
                 // Email Field with email validation
-                TextFormField(
+                _buildTextField(
                   controller: _emailController,
-                  decoration: const InputDecoration(labelText: "Email"),
+                  label: "Email",
+                  icon: Icons.email,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter an email';
@@ -166,9 +165,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 // Password Field with password validation
-                TextFormField(
+                _buildTextField(
                   controller: _passwordController,
-                  decoration: const InputDecoration(labelText: "Password"),
+                  label: "Password",
+                  icon: Icons.lock,
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -180,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 // Avatar image preview inside a circle
                 _selectedImage != null
                     ? ClipOval(
@@ -198,26 +198,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 fit: BoxFit.cover,
                               ),
                       )
-                    : const Text("No avatar image selected"),
+                    : const Text("No avatar image selected",
+                        style: TextStyle(color: Colors.grey)),
                 // Pick Image button
                 TextButton.icon(
                   onPressed: _pickImage,
                   icon: const Icon(Icons.image),
                   label: const Text("Pick Image"),
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.deepPurple,
+                    // Text color (formerly 'primary')
+                    side: BorderSide(color: Colors.deepPurple),
+                  ),
                 ),
                 const SizedBox(height: 20),
-                // Loading indicator or Register button
+
+// Loading indicator or Register button
                 _isLoading
                     ? const CircularProgressIndicator()
                     : ElevatedButton(
                         onPressed: _register,
-                        child: const Text("Register"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          // Button background color (formerly 'primary')
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 100),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        child: const Text(
+                          "Register",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white, // Chữ sáng hơn với màu trắng
+                            fontWeight: FontWeight.bold, // Tăng độ đậm cho chữ
+                          ),
+                        ),
                       ),
-                const SizedBox(height: 20),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("You already have an account!"),
+                    const Text("You already have an account?"),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -227,7 +250,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         );
                       },
-                      child: const Text("Sign in!"),
+                      child: const Text("Sign in!",
+                          style: TextStyle(color: Colors.deepPurple)),
                     ),
                   ],
                 ),
@@ -235,6 +259,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  // Helper method to build text fields
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool obscureText = false,
+    String? Function(String?)? validator,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
+          ),
+        ),
+        validator: validator,
       ),
     );
   }

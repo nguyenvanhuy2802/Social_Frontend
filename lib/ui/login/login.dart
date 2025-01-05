@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:social_app/config/ApiConfig.dart';
-import 'package:social_app/register.dart';
+import 'package:social_app/ui/register/register.dart';
 import 'package:social_app/ui/home/home.dart';
 
 class LoginScreen extends StatefulWidget {

@@ -5,9 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/foundation.dart';
-import 'package:social_app/login.dart';
+import 'package:social_app/ui/login/login.dart';
 
-import 'config/ApiConfig.dart';
+import '../../config/ApiConfig.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

@@ -73,35 +73,44 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: const Color(0xFF0078FF), // Zalo blue color for app bar
         elevation: 0,
         toolbarHeight: 80,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ), // Rounded corners for the AppBar
+        flexibleSpace: Padding(
+          padding: const EdgeInsets.all(20.0), // Adding padding to the AppBar
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
           color: Colors.white, // White background for the entire screen
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20), // Reduced vertical padding
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20), // Adjust padding
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start, // Aligning to the top
               children: [
-                // Add the logo image at the top with animation
+                // Logo image with animation at the top
                 AnimatedOpacity(
                   opacity: 1.0,
-                  duration: Duration(seconds: 1),
+                  duration: const Duration(seconds: 1),
                   child: SvgPicture.asset(
                     'assets/icons/social_logo.svg', // Path to your SVG image
-                    width: 120,
-                    height: 120,
+                    width: 100,  // Smaller logo size
+                    height: 100,
                   ),
                 ),
-                const SizedBox(height: 20), // Reduced space between logo and form fields
+                const SizedBox(height: 15), // Reduced space between logo and form fields
 
                 // "Welcome Back" Text
                 const Text(
                   "Welcome Back",
                   style: TextStyle(
-                    fontSize: 32,  // Larger font size for better visibility
+                    fontSize: 28,  // Slightly smaller font size
                     fontWeight: FontWeight.bold,
                     color: Colors.black, // Black color for text
                     shadows: [
@@ -113,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30), // Reduced space between title and input fields
+                const SizedBox(height: 25), // Adjusted space between title and input fields
 
                 // Username Field with light purple background
                 TextFormField(
@@ -136,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 15), // Reduced space between username and password fields
+                const SizedBox(height: 12), // Reduced space between username and password fields
 
                 // Password Field with light purple background
                 TextFormField(
@@ -163,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 20), // Reduced space between password field and login button
+                const SizedBox(height: 18), // Adjusted space between password field and login button
 
                 // Login Button with dark purple background
                 _isLoading

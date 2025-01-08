@@ -72,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'imgFile',
         _selectedImage!.path,
         contentType:
-            MediaType(mimeTypeData?[0] ?? 'image', mimeTypeData?[1] ?? 'jpeg'),
+        MediaType(mimeTypeData?[0] ?? 'image', mimeTypeData?[1] ?? 'jpeg'),
       );
 
       request.files.add(imageFile);
@@ -114,6 +114,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         title: const Text("Register"),
         backgroundColor: Colors.deepPurple, // Stylish AppBar color
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ), // Rounded corners for the AppBar
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -129,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   label: "Username",
                   icon: Icons.person,
                   validator: (value) =>
-                      value!.isEmpty ? 'Please enter a username' : null,
+                  value!.isEmpty ? 'Please enter a username' : null,
                 ),
                 // Full Name Field
                 _buildTextField(
@@ -137,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   label: "Full Name",
                   icon: Icons.person_outline,
                   validator: (value) =>
-                      value!.isEmpty ? 'Please enter your full name' : null,
+                  value!.isEmpty ? 'Please enter your full name' : null,
                 ),
                 // Bio Field
                 _buildTextField(
@@ -184,22 +191,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Avatar image preview inside a circle
                 _selectedImage != null
                     ? ClipOval(
-                        child: kIsWeb
-                            ? Image.network(
-                                _selectedImage!.path,
-                                height: 100,
-                                width: 100,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.file(
-                                _selectedImage!,
-                                height: 100,
-                                width: 100,
-                                fit: BoxFit.cover,
-                              ),
-                      )
+                  child: kIsWeb
+                      ? Image.network(
+                    _selectedImage!.path,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  )
+                      : Image.file(
+                    _selectedImage!,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+                )
                     : const Text("No avatar image selected",
-                        style: TextStyle(color: Colors.grey)),
+                    style: TextStyle(color: Colors.grey)),
                 // Pick Image button
                 TextButton.icon(
                   onPressed: _pickImage,
@@ -213,29 +220,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
 
-// Loading indicator or Register button
+                // Loading indicator or Register button
                 _isLoading
                     ? const CircularProgressIndicator()
                     : ElevatedButton(
-                        onPressed: _register,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
-                          // Button background color (formerly 'primary')
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 100),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        child: const Text(
-                          "Register",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white, // Chữ sáng hơn với màu trắng
-                            fontWeight: FontWeight.bold, // Tăng độ đậm cho chữ
-                          ),
-                        ),
-                      ),
+                  onPressed: _register,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    // Button background color (formerly 'primary')
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 100),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white, // Chữ sáng hơn với màu trắng
+                      fontWeight: FontWeight.bold, // Tăng độ đậm cho chữ
+                    ),
+                  ),
+                ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

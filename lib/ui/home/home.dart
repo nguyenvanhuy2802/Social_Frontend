@@ -1,6 +1,5 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "package:social_app/ui/discovery/discovery.dart";
 import "package:social_app/ui/setting/setting.dart";
 import "package:social_app/ui/follower/follower.dart";
@@ -32,10 +31,9 @@ class _SocialHomePageState extends State<SocialHomePage> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.person_add), label: 'Followers'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.album), label: 'Discovery'),
+                icon: Icon(Icons.chat), label: 'Chat'), // Đổi từ 'Discovery' thành 'Chat'
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           ],
         ),
         tabBuilder: (BuildContext context, int index) {

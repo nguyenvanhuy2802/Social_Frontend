@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/ui/login/login.dart';
-import 'package:social_app/ui/home/home.dart';
 
 void main() => runApp(const MyApp());
 

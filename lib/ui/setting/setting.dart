@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/ui/login/login.dart';  // Đảm bảo đã import màn hình login
 
 class SettingTab extends StatefulWidget {
@@ -115,11 +116,17 @@ class _SettingTabState extends State<SettingTab> {
 
               // Logout button
               ElevatedButton(
-                onPressed: () {
-                  // Handle logout action here
+                onPressed: () async {
+                  // Lấy instance của SharedPreferences
+                  final prefs = await SharedPreferences.getInstance();
+
+                  // Xóa username đã lưu trong SharedPreferences
+                  await prefs.remove('username');
+
+                  // Hiển thị thông báo đã đăng xuất
                   _showSnackBar("Logged Out!");
 
-                  // Navigate to the Login screen
+                  // Chuyển đến màn hình đăng nhập
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginScreen()),

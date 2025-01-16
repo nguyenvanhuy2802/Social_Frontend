@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_svg/flutter_svg.dart'; // Add the package flutter_svg
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/config/ApiConfig.dart';
 import 'package:social_app/ui/register/register.dart';
 import 'package:social_app/ui/home/home.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -49,7 +51,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+        final token = data['token'];
+
+        // Lưu token và username vào Local Storage (SharedPreferences)
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userId', token);
+        await prefs.setString('username', _usernameController.text);
+
         _showSnackBar("Login successful!", isSuccess: true);
+
+        // Điều hướng đến màn hình chính
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const SocialHomePage()),
@@ -73,18 +84,18 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: const Color(0xFF0078FF), // Zalo blue color for app bar
         elevation: 0,
         toolbarHeight: 80,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(30),
           ),
         ), // Rounded corners for the AppBar
-        flexibleSpace: Padding(
-          padding: const EdgeInsets.all(20.0), // Adding padding to the AppBar
+        flexibleSpace: const Padding(
+          padding: EdgeInsets.all(20.0), // Adding padding to the AppBar
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white, // White background for the entire screen
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20), // Adjust padding
